@@ -197,11 +197,11 @@ function DashboardComponent() {
             </div>
             <Dialog open={isAddLinkModalOpen} onOpenChange={setIsAddLinkModalOpen}>
               <DialogTrigger asChild>
-                <Button>
+                <Button className="bg-black text-white">
                   <Plus className="mr-2 h-4 w-4" /> Add Link
                 </Button>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className="bg-white opacity-100">
                 <DialogHeader>
                   <DialogTitle>Add New Link</DialogTitle>
                   <DialogDescription>Enter the details of the link you want to save.</DialogDescription>
@@ -276,7 +276,7 @@ function DashboardComponent() {
                   </div>
                 </div>
                 <DialogFooter>
-                  <Button onClick={handleAddLink}>Save Link</Button>
+                  <Button className="text-white" onClick={handleAddLink}>Save Link</Button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>

@@ -1,9 +1,9 @@
+/* Import DM Sans font */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import DM Sans font */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 
 /* Global Styles */
 body {
@@ -24,7 +24,7 @@ p {
 
 /* Example of a custom utility class */
 .bg-primary {
-  background-color: #0070f3; /* Example primary color */
+  background-color: #000; /* Example primary color */
 }
 
 .text-primary {
