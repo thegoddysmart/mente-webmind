@@ -1,0 +1,57 @@
+{% comment %} {% extends '../base.html' %} {% endcomment %}
+{% load static %}
+{% block title %}My Bookmarks{% endblock %}
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/s.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+{% endblock %}
+{% block content %}
+  <header>
+    <input type="checkbox" name="" id="chek">
+    <label for="chek"><i class="fa-solid fa-bars"></i></label>
+      <h1 class="logo">Mente</h1>
+      <nav>
+        <a href="{% url 'mente:home' %}">home</a>
+        <a href="{% url 'mente:add_bookmark' %}">Add</a>
+        <a href="{% url 'mente:search_bookmark' %}">Search</a>
+      </nav>
+      <form action="{% url "logout" %}" method="post">
+        <input type="submit" value='Logout' class="btn">
+        {% csrf_token %}
+      </form>
+    
+  </header>
+  {% for bookmark in bookmarks %}
+    <div class="card">
+      <div class="icons">
+        <i class="fas fa-download" title='Download'></i>
+        <i class="fas fa-pen" title='Edit'></i>
+        <a href="{% url 'mente:delete' bookmark_id=bookmark.id %}" style='text-decoration: none;'>
+          <i class="fas fa-trash" title='Delete'></i>
+        </a>
+      </div>
+      <h2><a href="{{ bookmark.get_absolute_url }}">{{ bookmark.title }}</a></h2>
+      <a href="{{ bookmark.url }}">{{ bookmark.url }}</a>
+      <p>{{ bookmark.about }}</p>
+      <div class="tags">
+        <span class="tag">React</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Web Development</span>
+      </div>
+      <div class="highlights">
+        <strong>Highlights:</strong>
+        <ul>
+          <li>{{ bookmark.highlight }}</li>
+        </ul>
+      </div>
+      <div class="notes">
+        <strong>Notes:</strong>
+        <p>{{ bookmark.notes|truncatewords_html:30 }}</p>
+      </div>
+      <div class="footer">
+        <p>Created: {{ bookmark.created }}&nbsp;&nbsp;•&nbsp;&nbsp; Updated: {{ bookmark.updated }}</p>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}

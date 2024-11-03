@@ -1,0 +1,32 @@
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/s.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+{% endblock %}
+{% block title %}{{ bookmark.title }}{% endblock %}
+
+{% block content %}
+  <header>
+    <input type="checkbox" name="" id="chek">
+    <label for="chek"><i class="fa-solid fa-bars"></i></label>
+      <h1 class="logo">Mente</h1>
+      <nav>
+        <a href="{% url 'mente:home' %}">home</a>
+        <a href="{% url 'mente:search_bookmark' %}">Search</a>
+        <a href="{% url 'mente:logout' %}">Logout</a>
+      </nav>
+    <a href="{% url 'mente:add_bookmark' %}" class="btn">Add</a>
+  </header>
+  <div class="card">
+    <div class='blog-container'>
+    <h1>{{ bookmark.title }}</h1>
+    {% comment %} <p>
+      Created {{ bookmark.created }} by {{ bookmark.owner }} {% endcomment %}
+      <div class="footer">
+        <p>Created: {{ bookmark.created }}&nbsp;&nbsp;•&nbsp;&nbsp; Updated: {{ bookmark.updated }}</p>
+      </div>
+      <p>{{ bookmark.notes }}</p>
+    </div>
+  </div>
+{% endblock %}

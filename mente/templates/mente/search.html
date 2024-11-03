@@ -1,0 +1,37 @@
+{% comment %} {% extends "../base.html" %} {% endcomment %}
+{% load static %}
+{% block title %}Search{% endblock %}
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/s.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+{% endblock %}
+{% block content %}
+  {% if query %}
+    <h1>Bookmarks containing "{{ query }}"</h1>
+    <h3>
+      {% with results.count as total_results %}
+        Found {{ total_results }} result{{ total_results|pluralize }}
+      {% endwith %}
+    </h3>
+    {% for bookmark in results %}
+      <h4>
+        <a href="{{ bookmark.get_absolute_url }}">
+          {{ bookmark.title }}
+        </a>
+      </h4>
+      {{ bookmark.body|truncatewords_html:12 }}
+    {% empty %}
+      <p>There are no results for your query.</p>
+    {% endfor %}
+    <p><a href="{% url 'mente:search_bookmark' %}">Search again</a></p>
+  {% else %}
+    <div class="search">
+				<form class="search-form" method='get'>
+          {% csrf_token %}
+					<input type="text" placeholder="Search for your bookmarks.." id='query' name='query'>
+					<input type="submit" value="Search">
+				</form>
+		</div>
+  {% endif %}
+{% endblock %}
